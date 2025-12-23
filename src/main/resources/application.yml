@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: invoices
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+
