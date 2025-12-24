@@ -26,6 +26,7 @@ public class PayoutController {
 
     @PostMapping("/{id}/mark-processing")
     public ResponseApi<PayoutEntity> markProcessing(@PathVariable UUID id, @RequestBody MarkProcessingRequest request) {
+        log.info("Called api");
         return new ResponseApi<PayoutEntity>().ok(payoutService.markAsProcessing(id, request.getProcessedBy()));
     }
 }

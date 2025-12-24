@@ -2,10 +2,10 @@ spring:
   application:
     name: invoices
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://localhost:3306/invoices?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: invoice-dev
+    password: d3v@2025
   jpa:
     hibernate:
       ddl-auto: update

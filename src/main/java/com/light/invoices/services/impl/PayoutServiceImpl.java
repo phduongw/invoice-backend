@@ -37,12 +37,13 @@ public class PayoutServiceImpl implements PayoutService {
         }
 
         try {
+            log.info("User: {}", processedBy);
             payout.setStatus(PayoutStatus.PROCESSING);
             payout.setProcessedBy(processedBy);
 
             Thread.sleep(4000);
             payoutRepository.save(payout);
-
+            log.info("Update status success");
             return payout;
         } catch (Exception e) {
             log.error("Error while marking payout as processing", e);
@@ -64,7 +65,7 @@ public class PayoutServiceImpl implements PayoutService {
     public PayoutEntity findById(UUID id) {
         if (Objects.isNull(id)) throw new IllegalArgumentException("Id cannot be null");
 
-        return payoutRepository.findById(id).orElseThrow(() -> new NotFoundException("Payout not found"));
+        return payoutRepository.findByIdForUpdate(id).orElseThrow(() -> new NotFoundException("Payout not found"));
     }
 
     private Boolean isExistById(UUID id) {

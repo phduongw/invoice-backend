@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: invoices-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: inv0ic3s@2025
+      MYSQL_DATABASE: invoices
+      MYSQL_USER: invoice-dev
+      MYSQL_PASSWORD: d3v@2025
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  mysql_data:

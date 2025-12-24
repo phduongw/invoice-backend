@@ -5,6 +5,7 @@ import jakarta.persistence.LockModeType;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -17,4 +18,8 @@ public interface PayoutRepository extends JpaRepository<PayoutEntity, UUID> {
 
     @Lock(LockModeType.PESSIMISTIC_READ)
     Optional<PayoutEntity> findById(@NonNull UUID id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select p from PayoutEntity p where p.id = :id")
+    Optional<PayoutEntity> findByIdForUpdate(UUID id);
 }
